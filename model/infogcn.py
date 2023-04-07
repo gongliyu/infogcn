@@ -21,7 +21,7 @@ class InfoGCN(nn.Module):
                  drop_out=0, num_head=3, noise_ratio=0.1, k=0, gain=1):
         super(InfoGCN, self).__init__()
 
-        A = np.stack([np.eye(num_point)] * num_head, axis=0)
+        A = np.stack([np.eye(num_point)] * num_head, axis=0, dtype='f4')
 
         base_channel = 64
         self.num_class = num_class
@@ -61,7 +61,7 @@ class InfoGCN(nn.Module):
     def get_A(self, graph, k):
         Graph = import_class(graph)()
         A_outward = Graph.A_outward_binary
-        I = np.eye(Graph.num_node)
+        I = np.eye(Graph.num_node, dtype='f4')
         return  torch.from_numpy(I - np.linalg.matrix_power(A_outward, k))
 
     def latent_sample(self, mu, logvar):

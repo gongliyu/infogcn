@@ -1,3 +1,14 @@
+# data file
+*.npz
+*.zip
+/data/ntu/denoised_data/
+/data/ntu/raw_data/
+/data/nturgbd_raw/
+/results/
+
+#****************************************
+# original  
+#****************************************
 *.sh
 wandb
 *_old.py
