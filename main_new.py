@@ -12,7 +12,6 @@ import resource
 
 from collections import OrderedDict
 
-# import apex
 import torch
 import torch.optim as optim
 import numpy as np
@@ -67,17 +66,7 @@ class Processor():
         self.best_acc = 0
         self.best_acc_epoch = 0
 
-        model = self.model.cuda()
-
-        if self.arg.half:
-            self.model, self.optimizer = torch.amp.initialize(
-                model,
-                self.optimizer,
-                opt_level=f'O{self.arg.amp_opt_level}'
-            )
-            if self.arg.amp_opt_level != 1:
-                self.print_log('[WARN] nn.DataParallel is not yet supported by amp_opt_level != "O1"')
-
+        self.model.to(self.arg.device)
         # self.model = torch.nn.DataParallel(model, device_ids=(0,1,2))
 
     def load_data(self):
@@ -136,7 +125,7 @@ class Processor():
             noise_ratio=self.arg.noise_ratio,
             gain=self.arg.z_prior_gain
         )
-        self.loss = LabelSmoothingCrossEntropy().cuda()
+        self.loss = LabelSmoothingCrossEntropy().to(self.arg.device)
 
         if self.arg.weights:
             self.global_step = int(self.arg.weights[:-3].split('-')[-1])
@@ -248,8 +237,8 @@ class Processor():
         for data, y, index in tqdm(self.data_loader['train'], dynamic_ncols=True):
             self.global_step += 1
             with torch.no_grad():
-                data = data.float().cuda()
-                y = y.long().cuda()
+                data = data.float().to(self.arg.device)
+                y = y.long().to(self.arg.device)
             timer['dataloader'] += self.split_time()
 
             # forward

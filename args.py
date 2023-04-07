@@ -13,6 +13,7 @@ def get_parser():
     parser = argparse.ArgumentParser( description='Spatial Temporal Graph Convolution Network')
     parser.add_argument('--debug', type=str2bool, default=False, help='Debug mode; default false')
     parser.add_argument('--log_dir', type=str, default='.', help='')
+    parser.add_argument('--device', type=str, default='cuda')
     parser.add_argument('--model_saved_name', default='')
     parser.add_argument('--noise_ratio', type=float, default=0.5, help='')
 
