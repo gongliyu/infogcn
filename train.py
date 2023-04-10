@@ -38,7 +38,7 @@ def main(clargs):
     train_data, val_data = random_split(train_data, [train_data_size, valid_data_size])
     test_data = TensorDataset(X_te, Y_te)
 
-    train_loader = DataLoader(train_data, batch_size=clargs.batch_size)
+    train_loader = DataLoader(train_data, batch_size=clargs.batch_size, shuffle=True)
     val_loader = DataLoader(val_data, batch_size=clargs.batch_size)
     test_loader = DataLoader(test_data, batch_size=clargs.batch_size)
     model = SpVGCNTraining(lr=clargs.lr)
