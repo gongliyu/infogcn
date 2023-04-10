@@ -264,6 +264,7 @@ class Processor():
 
             cls_loss = self.loss(y_hat, y)
             loss = self.arg.lambda_2* mmd_loss + self.arg.lambda_1* l2_z_mean + cls_loss
+            print(f'lambda_2={self.ar}')
             # backward
             self.optimizer.zero_grad()
             if self.arg.half:

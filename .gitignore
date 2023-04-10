@@ -1,10 +1,12 @@
 # data file
+*.pkl
 *.npz
 *.zip
 /data/ntu/denoised_data/
 /data/ntu/raw_data/
 /data/nturgbd_raw/
 /results/
+/log/
 
 #****************************************
 # original  
