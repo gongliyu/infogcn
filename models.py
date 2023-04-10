@@ -12,7 +12,7 @@ from torch import linalg as LA
 
 class SpVGCN(nn.Module):
     def __init__(self, num_class=8, num_point=17, num_person=1, graph='graph.Graph', in_channels=2,
-                 drop_out=0, num_head=3, noise_ratio=0.5, k=1, gain=3):
+                 drop_out=0.2, num_head=3, noise_ratio=0.5, k=1, gain=3):
         super().__init__()
 
         A = np.stack([np.eye(num_point)] * num_head, axis=0, dtype='f4')

@@ -38,16 +38,16 @@ class SpVGCNTraining(pl.LightningModule):
 
     def validation_step(self, batch, batch_idx):
         x, y = batch
-        logits, _ = self.model(x)
+        logits = self.model(x)
         self.val_acc(logits, y)
         self.log('validation_accuracy', self.train_acc)
 
     def test_step(self, batch, batch_idx):
         x, y = batch
-        logits, _ = self.model(x)
+        logits = self.model(x)
         self.test_acc(logits, y)
         self.log('test_accuracy', self.test_acc)
 
     def configure_optimizers(self):
-        optimizer = torch.optim.Adam(self.model.parameters(), lr=self.lr)
+        optimizer = torch.optim.Adam(self.model.parameters(), lr=self.lr, weight_decay=1e-5)
         return {'optimizer': optimizer}
