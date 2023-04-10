@@ -11,7 +11,7 @@ from torch import linalg as LA
 
 
 class SpVGCN(nn.Module):
-    def __init__(self, num_class=8, num_point=17, num_person=1, graph='graph.Graph', in_channels=3,
+    def __init__(self, num_class=8, num_point=17, num_person=1, graph='graph.Graph', in_channels=2,
                  drop_out=0, num_head=3, noise_ratio=0.5, k=1, gain=3):
         super().__init__()
 
@@ -101,10 +101,11 @@ class SpVGCN(nn.Module):
         z_logvar = self.fc_logvar(x)
         z = self.latent_sample(z_mu, z_logvar)
 
-        y_hat = self.decoder(z)
-
-        return y_hat, z
-
+        logits = self.decoder(z)
+        if self.training:
+            return logits, z
+        else:
+            return logits
 
 def import_class(name):
     components = name.split('.')

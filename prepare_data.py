@@ -97,7 +97,8 @@ def collect_poses(ovideo, window_size=1, exclude_in_bed=False):
             kpts = []
             for kp_name in kp_names:
                 kpt = person['pose'][kp_name]
-                kpts.append(kpt['coordinate'] + [kpt['auto_annotation_confidence']])
+                # kpts.append(kpt['coordinate'] + [kpt['auto_annotation_confidence']])
+                kpts.append(kpt['coordinate'])
             poses.append(kpts)
         n_poses = len(poses)
         if n_poses < 1:
