@@ -49,5 +49,5 @@ class SpVGCNTraining(pl.LightningModule):
         self.log('test_accuracy', self.test_acc)
 
     def configure_optimizers(self):
-        optimizer = torch.optim.Adam(self.model.parameters(), lr=self.lr, weight_decay=1e-5)
+        optimizer = torch.optim.Adam(self.model.parameters(), lr=self.lr)
         return {'optimizer': optimizer}

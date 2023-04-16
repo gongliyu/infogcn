@@ -23,10 +23,10 @@ import tools
 num_node = 17
 self_link = [(i, i) for i in range(num_node)]
 inward_ori_index = [
-    (0, 1), (1, 3), (0, 2), (2, 4), # head
-    (0, 5), (5, 7), (7, 9), # left arm
+    (0, 1), (1, 3), (0, 2), (2, 4), (1, 2), # head
+    (0, 5), (5, 7), (7, 9), (5, 6), # left arm
     (0, 6), (6, 8), (8, 10), # right arm
-    (5, 11), (11, 13), (13, 15), # left leg
+    (5, 11), (11, 13), (13, 15), (11, 12), # left leg
     (6, 12), (12, 14), (14, 16) # right leg
 ]
 
